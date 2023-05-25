@@ -34,8 +34,13 @@ if ! command_exists kubectl; then
   sudo apt-get install -y kubectl
 fi
 
+# Start Minikube
+minikube start
+
 # Apply YAML files using kubectl
 kubectl apply -f kubernetes-manifests/deployment.yaml -f kubernetes-manifests/mongo.deployment.yaml -f kubernetes-manifests/mongo.service.yaml -f kubernetes-manifests/service.yaml
 
 # Execute minikube service command
-minikube service node-todo-service --url
+output_file="minikube_service_output.txt"
+minikube service node-todo-service --url > "$output_file"
+echo "Output saved to $output_file"
