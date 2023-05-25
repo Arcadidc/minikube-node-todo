@@ -21,7 +21,7 @@ Node provides the RESTful API. Angular provides the frontend and accesses the AP
 ## Installation
 
 
-### Are you a Linux user? Good luck! There is a script that does it for you:
+### Are you a Linux user? Lucky you! There is a script that does it for you:
 
 - There is a script that can be found at the project root called `start.sh` , which checks if the requirements are installed.
 - The script also starts minikube and apply the YAML files that can be found in the `Kubernetes-manifests` folder.
