@@ -1,29 +1,31 @@
-################################################################################
-# WARNING: This MongoDB deployment is not suitable for production as the data is
-# not persistently stored and will go away every time the Pod restarts. Consider
-# using a Helm chart that provisions a StatefulSet instead of Deployment.
-################################################################################
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: node-todo-mongodb
+  name: node-todo-mongodb  # Name of the deployment
   labels:
-    app: node-todo
+    app: node-todo  # Labels for the deployment
     tier: db
 spec:
-  replicas: 1
+  replicas: 1  # Number of replicas
   selector:
     matchLabels:
-      app: node-todo
+      app: node-todo  # Match labels for selecting the pods
       tier: db
   template:
     metadata:
       labels:
-        app: node-todo
+        app: node-todo  # Labels for the pod
         tier: db
     spec:
-      containers:
+      containers:  # Main containers
         - name: mongo
-          image: mongo:4
+          image: mongo:4  # Image for the container
+          resources:
+            requests:  # Resource requests for the container
+              memory: "64Mi"
+              cpu: "250m"
+            limits:  # Resource limits for the container
+              memory: "128Mi"
+              cpu: "500m"
           ports:
-            - containerPort: 27017
+            - containerPort: 27017  # Port to expose on the container

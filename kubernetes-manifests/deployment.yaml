@@ -1,31 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-todo-deployment
+  name: node-todo-deployment  # Name of the deployment
 spec:
-  replicas: 1
+  replicas: 1  # Number of replicas
   selector:
     matchLabels:
-      app: node-todo
+      app: node-todo  # Match labels for selecting the pods
   template:
     metadata:
       labels:
-        app: node-todo
+        app: node-todo  # Labels for the pod
     spec:
-     initContainers:
+      initContainers:  # Init containers to run before the main container starts
       - name: init-db-ready
-        image: mongo:4
-        command: ['/bin/sh', '-c']
+        image: mongo:4  # Image for the init container
+        command: ['/bin/sh', '-c']  # Command to execute in the init container
         args:
           - echo "Waiting for mongodb to start...";until (mongo --host node-todo-mongodb:27017 >/dev/null 2>&1) do echo "Waiting for connection for 2 sec."; sleep 2; done
-     containers:
+          # Arguments for the init container, waits for MongoDB to start before proceeding
+      containers:  # Main containers
       - name: backend
-        image: arcadidc/node-todo:v1.4
+        image: arcadidc/node-todo:v1.4  # Image for the main container
+        resources:
+          requests:  # Resource requests for the container
+            memory: "64Mi"
+            cpu: "250m"
+          limits:  # Resource limits for the container
+            memory: "128Mi"
+            cpu: "500m"
         ports:
         - name: http-server
-          containerPort: 8080
-        env:
+          containerPort: 8080  # Port to expose on the container
+        env:  # Environment variables for the container
         - name: PORT
-          value: "8080"
+          value: "8080"  # Value for the PORT environment variable
         - name: TODO_DB_ADDR
-          value: "node-todo-mongodb:27017"
+          value: "node-todo-mongodb:27017"  # Value for the TODO_DB_ADDR environment variable

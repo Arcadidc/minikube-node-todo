@@ -29,3 +29,9 @@ Each branch represents a certain tutorial.
 Happy Todo-ing!
 
 ![Todo-aholic](http://i.imgur.com/ikyqgrn.png)
+
+
+minikube install
+need docker
+need to go kubernetes-manifests 
+execute minikube service node-todo-service --url
