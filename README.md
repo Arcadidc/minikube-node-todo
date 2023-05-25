@@ -7,24 +7,25 @@ Node provides the RESTful API. Angular provides the frontend and accesses the AP
 ## Requirements
 
 - [Node and npm](http://nodejs.org)
-- MongoDB: Make sure you have your own local or remote MongoDB database URI configured in `config/database.js`
+- [Kubectl](https://kubernetes.io/docs/reference/kubectl/)
 - [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+- [Docker](https://www.docker.com/)
 
 ## Installation
 
-1. Clone the repository: `git clone git@github.com:arcadidc/minikube-node-todo`
-2. Install the application: `npm install`
-3. Place your own MongoDB URI in `config/database.js`
-3. Start the server: `node server.js`
-4. View in browser at `http://localhost:8080`
+
+### Are you a Linux user? Good luck! There is a script that does it for you:
+
+- There is a script that can be found at the project root called `start.sh` , which checks if the requirements are installed.
+- The script also starts minikube and apply the YAML files that can be found in the `Kubernetes-manifests` folder.
+- It also runs the command `minikube service node-todo-service --url` for you, this command  basically  exposes the service so you can access it from your host.
+- One run, you can find the link to your API server in the file (minikube_service_output.txt)
+
+### Are you a Windows user or the script didn't work?  Some extra steps:
+- You will need to access inside the folder `kubernetes-manifests` and execute `kube apply -f` with all of them. The pods will wait between them to be available so no need to do it in order!
+- After they are running (You can check it with `kubectl get pods` if needed) you will need to expose the service executing the following command:
+ > minikube service node-todo-service --url
+- This will prompt an IP:PORT , this is important as it will be needed in order to configure our [cli-tool](https://github.com/Arcadidc/cli-tool) program!
 
 
-
-
-#### Initial application was taken from https://github.com/scotch-io/node-todo
-
-
-minikube install
-need docker
-need to go kubernetes-manifests 
-execute minikube service node-todo-service --url
+# Initial application was taken from https://github.com/scotch-io/node-todo
