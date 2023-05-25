@@ -4,6 +4,13 @@ A Node app built with MongoDB and Angular. For demonstration purposes and a tuto
 
 Node provides the RESTful API. Angular provides the frontend and accesses the API. MongoDB stores like a hoarder.
 
+## What changed from the other project?
+
+- I created a Dockerfile to build a Docker image for the application.
+- I then pushed the image to a repository, in this case [Docker HUB](https://hub.docker.com/r/arcadidc/node-todo)
+- After having the image, I created four manifests in order to supply my Kubernetes deployments and Services. They can be found in `Kubernetes-manifests`.
+- Once applied the configuration from that YAML files, I was able to connect to the Server.
+
 ## Requirements
 
 - [Node and npm](http://nodejs.org)
