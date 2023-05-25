@@ -28,4 +28,6 @@ Node provides the RESTful API. Angular provides the frontend and accesses the AP
 - This will prompt an IP:PORT , this is important as it will be needed in order to configure our [cli-tool](https://github.com/Arcadidc/cli-tool) program!
 
 
-# Initial application was taken from https://github.com/scotch-io/node-todo
+
+
+## Initial application was taken from https://github.com/scotch-io/node-todo
