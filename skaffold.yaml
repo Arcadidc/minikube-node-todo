@@ -1,0 +1,20 @@
+apiVersion: skaffold/v4beta5
+kind: Config
+metadata:
+  name: node-todo
+build:
+  artifacts:
+    - image: arcadidc/node-todo
+      buildpacks:
+        builder: 'gcr.io/buildpacks/builder:v1'
+    - image: mongo
+      buildpacks:
+        builder: 'gcr.io/buildpacks/builder:v1'
+  tagPolicy:
+    sha256: {}
+manifests:
+  rawYaml:
+    - kubernetes-manifests/deployment.yaml
+    - kubernetes-manifests/mongo.deployment.yaml
+    - kubernetes-manifests/mongo.service.yaml
+    - kubernetes-manifests/service.yaml

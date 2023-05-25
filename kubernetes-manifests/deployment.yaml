@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-todo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-todo
+  template:
+    metadata:
+      labels:
+        app: node-todo
+    spec:
+     initContainers:
+      - name: init-db-ready
+        image: mongo:4
+        command: ['/bin/sh', '-c']
+        args:
+          - echo "Waiting for mongodb to start...";until (mongo --host node-todo-mongodb:27017 >/dev/null 2>&1) do echo "Waiting for connection for 2 sec."; sleep 2; done
+     containers:
+      - name: backend
+        image: arcadidc/node-todo:v1.4
+        ports:
+        - name: http-server
+          containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: TODO_DB_ADDR
+          value: "node-todo-mongodb:27017"
