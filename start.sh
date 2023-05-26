@@ -21,7 +21,6 @@ if ! command_exists docker; then
   sudo usermod -aG docker $USER 
   sudo systemctl enable docker
   sudo systemctl start docker
-  newgrp docker
 fi
 
 # Install kubectl if not installed
@@ -35,8 +34,8 @@ if ! command_exists kubectl; then
   sudo apt-get install -y kubectl
 fi
 
-# Add to the group
-sudo newgrp docker
+# Add user to the group
+sudo usermod -aG docker $USER 
 
 # Apply YAML files using kubectl
 kubectl apply -f kubernetes-manifests/deployment.yaml -f kubernetes-manifests/mongo.deployment.yaml -f kubernetes-manifests/mongo.service.yaml -f kubernetes-manifests/service.yaml
