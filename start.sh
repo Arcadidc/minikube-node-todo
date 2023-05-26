@@ -35,7 +35,7 @@ if ! command_exists kubectl; then
 fi
 
 # Start Minikube
-sleep(10)
+sleep 10
 minikube start
 
 # Apply YAML files using kubectl
