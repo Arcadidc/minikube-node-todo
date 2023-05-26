@@ -35,7 +35,11 @@ if ! command_exists kubectl; then
 fi
 
 # Configure docker
-usermod -aG docker $USER && newgrp docker
+sudo usermod -aG docker $USER && newgrp docker
+
+# Sleep time! So Docker driver can be configured before starting minikube.
+sleep(10)
+echo "Let's wait a bit before docker configuration completes..."
 
 # Start Minikube
 minikube start
