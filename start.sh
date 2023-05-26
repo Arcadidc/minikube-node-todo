@@ -34,6 +34,9 @@ if ! command_exists kubectl; then
   sudo apt-get install -y kubectl
 fi
 
+# Configure docker
+usermod -aG docker $USER && newgrp docker
+
 # Start Minikube
 minikube start
 
