@@ -34,7 +34,7 @@ if ! command_exists kubectl; then
   sudo apt-get install -y kubectl
 fi
 
-# Add user to the group
+# Add user to the group so minikube can find Docker Driver
 sudo chmod 666 /var/run/docker.sock
 sudo adduser $USER docker
 
