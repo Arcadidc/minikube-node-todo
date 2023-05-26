@@ -18,7 +18,7 @@ if ! command_exists docker; then
   echo "Docker not found. Installing Docker..."
   curl -fsSL https://get.docker.com -o get-docker.sh
   sudo sh get-docker.sh
-  sudo usermod -aG docker $USER
+  sudo usermod -aG docker $USER && newgrp docker
   sudo systemctl enable docker
   sudo systemctl start docker
 fi
@@ -33,10 +33,6 @@ if ! command_exists kubectl; then
   sudo apt-get update
   sudo apt-get install -y kubectl
 fi
-
-# Configure docker
-sudo usermod -aG docker $USER && newgrp docker
-
 
 # Start Minikube
 minikube start
