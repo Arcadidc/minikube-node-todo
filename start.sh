@@ -35,7 +35,8 @@ if ! command_exists kubectl; then
 fi
 
 # Add user to the group
-sudo usermod -aG docker $USER 
+sudo chmod 666 /var/run/docker.sock
+sudo adduser $USER docker
 
 # Start minikube
 minikube start
