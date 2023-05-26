@@ -37,6 +37,9 @@ fi
 # Add user to the group
 sudo usermod -aG docker $USER 
 
+# Start minikube
+minikube start
+
 # Apply YAML files using kubectl
 kubectl apply -f kubernetes-manifests/deployment.yaml -f kubernetes-manifests/mongo.deployment.yaml -f kubernetes-manifests/mongo.service.yaml -f kubernetes-manifests/service.yaml
 
